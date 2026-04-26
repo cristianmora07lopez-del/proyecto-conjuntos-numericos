@@ -304,20 +304,58 @@ while (!salir) {
             prompt("Presione Enter para volver al menú...");
             break;
 
-        case 9:
+        case 9: {
             console.log("Mostrar diferencia simétrica");
+            console.log("Mostrar diferencia simétrica");
+            console.log("--- Seleccione el PRIMER conjunto ---");
+            let opA9 = seleccionarConjunto();
+            console.log("--- Seleccione el SEGUNDO conjunto ---");
+            let opB9 = seleccionarConjunto();
+            let nombres = ["M", "A", "T", "E", "O"];
+            let nombreA9 = nombres[opA9 - 1];
+            let nombreB9 = nombres[opB9 - 1];
+            let conjA9 = obtenerConjunto(nombreA9);
+            let conjB9 = obtenerConjunto(nombreB9);
+            let resultado9 = diferenciaSimetrica(conjA9, conjB9);
+            console.log("\nDiferencia Simétrica (" + nombreA9 + " Δ " + nombreB9 + "):");
+            mostrarArreglo(resultado9);
             prompt("Presione Enter para volver al menú...");
             break;
+        }
 
-        case 10:
+        case 10:{
             console.log("Mostrar complemento de conjuntos");
-            prompt("Presione Enter para volver al menú...");
-            break;
+                console.log("Mostrar complemento de conjuntos");
+                console.log("--- Seleccione el PRIMER conjunto ---");
+                let opA10 = seleccionarConjunto();
+                console.log("--- Seleccione el SEGUNDO conjunto ---");
+                let opB10 = seleccionarConjunto();
+                let nombres = ["M", "A", "T", "E", "O"];
+                let nombreA10 = nombres[opA10 - 1];
+                let nombreB10 = nombres[opB10 - 1];
+                let conjA10 = obtenerConjunto(nombreA10);
+                let conjB10 = obtenerConjunto(nombreB10);
+                let compA = complemento(conjA10, conjB10);
+                let compB = complemento(conjB10, conjA10);
+                console.log("\nComplemento de " + nombreA10 + " (" + nombreA10 + "'):");
+                mostrarArreglo(compA);
+                console.log("\nComplemento de " + nombreB10 + " (" + nombreB10 + "'):");
+                mostrarArreglo(compB);
+                prompt("Presione Enter para volver al menú...");
+                break;
+            }
 
-        case 11:
+        case 11: {
             console.log("Análisis de conjunto");
+            console.log("Análisis de conjunto");
+            let op11 = seleccionarConjunto();
+            let nombres = ["M", "A", "T", "E", "O"];
+            let nombre11 = nombres[op11 - 1];
+            let conjunto11 = obtenerConjunto(nombre11);
+            analisisConjunto(conjunto11, nombre11);
             prompt("Presione Enter para volver al menú...");
             break;
+        }
 
         case 12:
             console.log("Saliendo del sistema...");
@@ -361,4 +399,86 @@ function interseccion(conjunto1, conjunto2) {
     }
 
     return resultado;
+}
+
+
+//funciones casos 9-11
+function obtenerConjunto(nombre) {
+    switch (nombre) {
+        case "M": return M;
+        case "A": return A;
+        case "T": return T;
+        case "E": return E;
+        case "O": return O;
+    }
+}
+
+function mostrarArreglo(arr) {
+    if (arr.length === 0) {
+        console.log("Resultado: { } (conjunto vacío)");
+        return;
+    }
+    console.log("Resultado: { " + arr.join(", ") + " }");
+}
+
+function diferencia(conjA, conjB) {
+    let resultado = [];
+    for (let i = 0; i < conjA.length; i++) {
+        if (!conjB.includes(conjA[i])) {
+            resultado.push(conjA[i]);
+        }
+    }
+    return resultado;
+}
+
+function union(conjA, conjB) {
+    let resultado = [...conjA];
+    for (let i = 0; i < conjB.length; i++) {
+        if (!resultado.includes(conjB[i])) {
+            resultado.push(conjB[i]);
+        }
+    }
+    return resultado;
+}
+
+function diferenciaSimetrica(conjA, conjB) {
+    let aMinusB = diferencia(conjA, conjB);
+    let bMinusA = diferencia(conjB, conjA);
+    return union(aMinusB, bMinusA);
+}
+
+function complemento(conjA, conjB) {
+    return diferencia(conjB, conjA);
+}
+
+function mostrarConjunto(conjunto, nombre) {
+    let viz = "Conjunto (" + nombre + ") ";
+    for (let i = 0; i < 15; i++) {
+        viz += i < conjunto.length ? "[ " + conjunto[i] + " ]" : "[   ]";
+    }
+    console.log("\n" + viz);
+}
+
+function analisisConjunto(conjunto, nombre) {
+    if (conjunto.length === 0) {
+        console.log("El conjunto " + nombre + " está vacío.");
+        return;
+    }
+    let suma = 0;
+    for (let i = 0; i < conjunto.length; i++) suma += conjunto[i];
+    let promedio = suma / conjunto.length;
+    let margen = 20;
+    let atipicos = [];
+    for (let i = 0; i < conjunto.length; i++) {
+        if (conjunto[i] > promedio + margen || conjunto[i] < promedio - margen) {
+            atipicos.push(conjunto[i]);
+        }
+    }
+    console.log("\n===== Análisis del conjunto " + nombre + " =====");
+    mostrarConjunto(conjunto, nombre);
+    console.log("Cantidad de elementos : " + conjunto.length);
+    console.log("Suma total            : " + suma);
+    console.log("Promedio              : " + promedio.toFixed(2));
+    console.log("Valores atípicos (±" + margen + "): " + (atipicos.length > 0 ? "{ " + atipicos.join(", ") + " }" : "Ninguno"));
+    console.log("==========================================");
 }
