@@ -205,8 +205,12 @@ while (!salir) {
 
         case 4:
             console.log("Buscar en conjunto");
-            let seleccion = prompt("Presione Enter para volver al menú...");
-            do {
+             while (true) {
+                console.log("Seleccione M,A,T,E,O o presione Enter para salir");
+                let seleccion = prompt();
+
+                if (seleccion === "") break;
+
                 if (seleccion === "M") {
                     conjutoM();
                 } else if (seleccion === "A") {
@@ -217,14 +221,14 @@ while (!salir) {
                     conjutoE();
                 } else if (seleccion === "O") {
                     conjutoO();
-                } else if (seleccion !== " ") {
-                    break;
+                } else {
+                    console.log("No válido");
                 }
-            } while (seleccion !== " ");
+            }
             break;
 
         case 5:
-            console.log("Seleccione uno M,A,T,E,O o Enter para salir ");
+           console.log("Seleccione uno M,A,T,E,O o presione Enter para salir");
             let seleccionMostrar = prompt();
 
             if (seleccionMostrar === "M") {
@@ -481,4 +485,242 @@ function analisisConjunto(conjunto, nombre) {
     console.log("Promedio              : " + promedio.toFixed(2));
     console.log("Valores atípicos (±" + margen + "): " + (atipicos.length > 0 ? "{ " + atipicos.join(", ") + " }" : "Ninguno"));
     console.log("==========================================");
+}
+function conjutoM() {
+    while (true) {
+        console.log("¿Cuál número deseas buscar? (X para salir)");
+        let entrada = prompt();
+
+        if (entrada === "X") {
+            console.log("Volviendo al menú");
+            break;
+        }
+
+        let valor = parseInt(entrada);
+
+        if (isNaN(valor)) {
+            console.log("Ingrese un número válido");
+            continue;
+        }
+
+        let encontrado = false;
+
+        for (let i = 0; i < M.length; i++) {
+            if (M[i] === valor) {
+                console.log("Encontrado en posición:", i);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            console.log("No encontrado");
+        }
+    }
+}
+function conjutoA() {
+    while (true) {
+        console.log("¿Cuál número deseas buscar? (X para salir)");
+        let entrada = prompt();
+
+        if (entrada === "X") {
+            console.log("Volviendo al menú");
+            break;
+        }
+
+        let valor = parseInt(entrada);
+
+        if (isNaN(valor)) {
+            console.log("Ingrese un número válido");
+            continue;
+        }
+
+        let encontrado = false;
+
+        for (let i = 0; i < A.length; i++) {
+            if (A[i] === valor) {
+                console.log("Encontrado en posición:", i);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            console.log("No encontrado");
+        }
+    }
+}
+
+function conjutoT() {
+    while (true) {
+        console.log("¿Cuál número deseas buscar? (X para salir)");
+        let entrada = prompt();
+
+        if (entrada === "X") {
+            console.log("Volviendo al menú");
+            break;
+        }
+
+        let valor = parseInt(entrada);
+
+        if (isNaN(valor)) {
+            console.log("Ingrese un número válido");
+            continue;
+        }
+
+        let encontrado = false;
+
+        for (let i = 0; i < A.length; i++) {
+            if (A[i] === valor) {
+                console.log("Encontrado en posición:", i);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            console.log("No encontrado");
+        }
+    }
+}
+
+function conjutoE() {
+    while (true) {
+        console.log("¿Cuál número deseas buscar? (X para salir)");
+        let entrada = prompt();
+
+        if (entrada === "X") {
+            console.log("Volviendo al menú");
+            break;
+        }
+
+        let valor = parseInt(entrada);
+
+        if (isNaN(valor)) {
+            console.log("Ingrese un número válido");
+            continue;
+        }
+
+        let encontrado = false;
+
+        for (let i = 0; i < E.length; i++) {
+            if (E[i] === valor) {
+                console.log("Encontrado en posición:", i);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            console.log("No encontrado");
+        }
+    }
+}
+
+function conjutoO() {
+    while (true) {
+        console.log("¿Cuál número deseas buscar? (X para salir)");
+        let entrada = prompt();
+
+        if (entrada === "X") {
+            console.log("Volviendo al menú");
+            break;
+        }
+
+        let valor = parseInt(entrada);
+
+        if (isNaN(valor)) {
+            console.log("Ingrese un número válido");
+            continue;
+        }
+
+        let encontrado = false;
+
+        for (let i = 0; i < O.length; i++) {
+            if (O[i] === valor) {
+                console.log("Encontrado en posición:", i);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            console.log("No encontrado");
+        }
+    }
+}
+function mostrarM(){
+    while (true) {
+        let resultado = "Conjunto M ";
+        for (let i = 0; i < 15; i++) {
+            if (i < M.length) {
+                resultado += "[" + M[i] + "]";
+            } else {
+                resultado += "[ ]";
+            }
+        }
+        console.log(resultado);
+        let opcion = prompt("0 para volver a elegir conjunto ");
+        if (opcion === "0") break;
+    }
+}
+function mostrarA(){
+    while (true) {
+        let resultado = "Conjunto A ";
+        for (let i = 0; i < 15; i++) {
+            if (i < A.length) {
+                resultado += "[" + A[i] + "]";
+            } else {
+                resultado += "[ ]";
+            }
+        }
+        console.log(resultado);
+        let opcion = prompt("0 para volver a elegir conjunto ");
+        if (opcion === "0") break;
+    }
+}
+function mostrarT(){
+    while (true) {
+        let resultado = "Conjunto T ";
+        for (let i = 0; i < 15; i++) {
+            if (i < T.length) {
+                resultado += "[" + T[i] + "]";
+            } else {
+                resultado += "[ ]";
+            }
+        }
+        console.log(resultado);
+        let opcion = prompt("0 para volver a elegir conjunto ");
+        if (opcion === "0") break;
+    }
+}
+function mostrarE(){
+    while (true) {
+        let resultado = "Conjunto E ";
+        for (let i = 0; i < 15; i++) {
+            if (i < E.length) {
+                resultado += "[" + E[i] + "]";
+            } else {
+                resultado += "[ ]";
+            }
+        }
+        console.log(resultado);
+        let opcion = prompt("0 para volver a elegir conjunto ");
+        if (opcion === "0") break;
+    }
+}
+function mostrarO(){
+    while (true) {
+        let resultado = "Conjunto O ";
+        for (let i = 0; i < 15; i++) {
+            if (i < O.length) {
+                resultado += "[" + O[i] + "]";
+            } else {
+                resultado += "[ ]";
+            }
+        }
+        console.log(resultado);
+        let opcion = prompt("0 para volver a elegir conjunto ");
+        if (opcion === "0") break;
+    }
 }
